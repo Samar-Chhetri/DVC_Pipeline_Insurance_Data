@@ -1,0 +1,94 @@
+schema: '2.0'
+stages:
+  data_ingestion:
+    cmd: python src/components/data_ingestion.py
+    deps:
+    - path: data/insurance.csv
+      hash: md5
+      md5: 9151229e737c3c676c5c0fbdde478d66
+      size: 55628
+    - path: src/components/data_ingestion.py
+      hash: md5
+      md5: 7ebdf798ff6b4a42e6d26665d25ac18b
+      size: 2401
+    params:
+      params.yaml:
+        filter.age_value: 50
+    outs:
+    - path: artifacts/data.csv
+      hash: md5
+      md5: fa0a215c278009f5e3ee97bbea3456aa
+      size: 40749
+    - path: artifacts/test.csv
+      hash: md5
+      md5: 0270f6b4f46926540352c90d74932d3d
+      size: 8235
+    - path: artifacts/train.csv
+      hash: md5
+      md5: 753b1478b69ef4e3e07321e1cb259050
+      size: 32558
+  data_transformation:
+    cmd: python src/components/data_ingestion.py artifacts/data.csv artifacts/train.csv
+      artifacts/test.csv
+    deps:
+    - path: artifacts/data.csv
+      hash: md5
+      md5: fa0a215c278009f5e3ee97bbea3456aa
+      size: 40749
+    - path: artifacts/test.csv
+      hash: md5
+      md5: 0270f6b4f46926540352c90d74932d3d
+      size: 8235
+    - path: artifacts/train.csv
+      hash: md5
+      md5: 753b1478b69ef4e3e07321e1cb259050
+      size: 32558
+    - path: data/insurance.csv
+      hash: md5
+      md5: 9151229e737c3c676c5c0fbdde478d66
+      size: 55628
+    - path: src/components/data_transformation.py
+      hash: md5
+      md5: 00b03c9a443604f270e2501dda92115e
+      size: 3774
+    params:
+      params.yaml:
+        transformation.num_rows: 200
+    outs:
+    - path: artifacts/preprocessor.pkl
+      hash: md5
+      md5: bedf58be5b6c1ec16caf78b919ea8811
+      size: 2918
+  model_trainer:
+    cmd: python src/components/data_ingestion.py artifacts/data.csv artifacts/train.csv
+      artifacts/test.csv artifacts/preprocessor.pkl
+    deps:
+    - path: artifacts/data.csv
+      hash: md5
+      md5: fa0a215c278009f5e3ee97bbea3456aa
+      size: 40749
+    - path: artifacts/preprocessor.pkl
+      hash: md5
+      md5: bedf58be5b6c1ec16caf78b919ea8811
+      size: 2918
+    - path: artifacts/test.csv
+      hash: md5
+      md5: 0270f6b4f46926540352c90d74932d3d
+      size: 8235
+    - path: artifacts/train.csv
+      hash: md5
+      md5: 753b1478b69ef4e3e07321e1cb259050
+      size: 32558
+    - path: data/insurance.csv
+      hash: md5
+      md5: 9151229e737c3c676c5c0fbdde478d66
+      size: 55628
+    - path: src/components/model_trainer.py
+      hash: md5
+      md5: fb8653812e48b7453d6534c2e186dab8
+      size: 3278
+    outs:
+    - path: artifacts/model.pkl
+      hash: md5
+      md5: 644f6d36c71793c74dedf3a53524ff77
+      size: 132936

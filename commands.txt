@@ -1,0 +1,23 @@
+dvc add data/insurance.csv
+
+
+dvc stage add -n data_ingestion --force \
+                -p filter.age_value \
+                -d src/components/data_ingestion.py -d data/insurance.csv \
+                -o artifacts/data.csv -o artifacts/train.csv -o artifacts/test.csv \
+                python src/components/data_ingestion.py
+
+
+
+dvc stage add -n data_transformation --force \
+                -p transformation.num_rows \
+                -d src/components/data_transformation.py -d data/insurance.csv -d artifacts/data.csv -d artifacts/train.csv -d artifacts/test.csv   \
+                -o artifacts/preprocessor.pkl \
+                python src/components/data_ingestion.py artifacts/data.csv artifacts/train.csv artifacts/test.csv
+
+
+
+dvc stage add -n model_trainer --force \
+                -d src/components/model_trainer.py -d data/insurance.csv -d artifacts/data.csv -d artifacts/train.csv -d artifacts/test.csv -d artifacts/preprocessor.pkl  \
+                -o artifacts/model.pkl \
+                python src/components/data_ingestion.py artifacts/data.csv artifacts/train.csv artifacts/test.csv artifacts/preprocessor.pkl

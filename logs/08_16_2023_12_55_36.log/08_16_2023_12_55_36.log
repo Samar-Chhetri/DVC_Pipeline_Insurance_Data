@@ -1,0 +1,12 @@
+[2023-08-16 12:55:36,653 ] 27 root - INFO - Entered the data ingestion method
+[2023-08-16 12:55:36,678 ] 35 root - INFO - Read the dataset as dataframe
+[2023-08-16 12:55:36,685 ] 40 root - INFO - Train test split initiated
+[2023-08-16 12:55:36,693 ] 47 root - INFO - Ingestion of data is completed
+[2023-08-16 12:55:36,731 ] 65 root - INFO - Read the train and test data completed
+[2023-08-16 12:55:36,731 ] 66 root - INFO - Obtaining the preprocessor object
+[2023-08-16 12:55:36,732 ] 41 root - INFO - Categorical columns: ['sex', 'smoker', 'region']
+[2023-08-16 12:55:36,732 ] 42 root - INFO - Numerical columns: ['age', 'bmi', 'children']
+[2023-08-16 12:55:36,734 ] 77 root - INFO - Applying preprocessor object to train and test data
+[2023-08-16 12:55:36,753 ] 85 root - INFO - Saved preprocessing object
+[2023-08-16 12:55:36,755 ] 28 root - INFO - Splitting training and testing data
+[2023-08-16 12:55:58,192 ] 84 root - INFO - Best model found on both train and test dataset

@@ -1,0 +1,37 @@
+stages:
+  data_ingestion:
+    cmd: python src/components/data_ingestion.py
+    deps:
+    - data/insurance.csv
+    - src/components/data_ingestion.py
+    params:
+    - filter.age_value
+    outs:
+    - artifacts/data.csv
+    - artifacts/test.csv
+    - artifacts/train.csv
+  data_transformation:
+    cmd: python src/components/data_ingestion.py artifacts/data.csv artifacts/train.csv
+      artifacts/test.csv
+    deps:
+    - artifacts/data.csv
+    - artifacts/test.csv
+    - artifacts/train.csv
+    - data/insurance.csv
+    - src/components/data_transformation.py
+    params:
+    - transformation.num_rows
+    outs:
+    - artifacts/preprocessor.pkl
+  model_trainer:
+    cmd: python src/components/data_ingestion.py artifacts/data.csv artifacts/train.csv
+      artifacts/test.csv artifacts/preprocessor.pkl
+    deps:
+    - artifacts/data.csv
+    - artifacts/preprocessor.pkl
+    - artifacts/test.csv
+    - artifacts/train.csv
+    - data/insurance.csv
+    - src/components/model_trainer.py
+    outs:
+    - artifacts/model.pkl
