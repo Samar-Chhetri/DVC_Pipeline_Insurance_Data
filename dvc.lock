@@ -9,8 +9,8 @@ stages:
       size: 55628
     - path: src/components/data_ingestion.py
       hash: md5
-      md5: 7ebdf798ff6b4a42e6d26665d25ac18b
-      size: 2401
+      md5: ad8f81d733db71fe91973eeed62f82f7
+      size: 2402
     params:
       params.yaml:
         filter.age_value: 50

@@ -66,4 +66,4 @@ if __name__ == "__main__":
     trainer = ModelTrainer()
     best_model_name, r2_sc = trainer.initiate_model_trainer(train_arr, test_arr)
     print(f"Model used : {best_model_name}")
-    print(f"R2_score : {r2_sc}")
+    print(f"R2_score  : {r2_sc}")
