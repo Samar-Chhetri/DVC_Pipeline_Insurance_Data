@@ -1,4 +1,6 @@
 # Environments
 dvc_pipeline
 dvc_pipeline/
+
+# DVC pipeline artifacts
 /artifacts
